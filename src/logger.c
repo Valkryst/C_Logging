@@ -44,35 +44,45 @@ void printError(int errorNumber, const char fileName[], const char functionName[
     if (0 != errorNumber) {
         char errnoMessage[LOGGER_MAXIMUM_STRERROR_MESSAGE_LENGTH];
         if ((errorNumber = strerror_r(errorNumber, errnoMessage, LOGGER_MAXIMUM_STRERROR_MESSAGE_LENGTH)) != 0) {
-            fprintf(stderr,
-                    "%s#%s\n\r\tmessage: %s\n",
-                    fileName,
-                    functionName,
-                    message);
+            fprintf(
+				stderr,
+                "%s#%s\n\r\tmessage: %s\n",
+                fileName,
+                functionName,
+                message
+			);
 
             if (strerror_r(errorNumber, errnoMessage, LOGGER_MAXIMUM_STRERROR_MESSAGE_LENGTH) != 0) {
-                fprintf(stderr,
-                        "logger.c#printError\n\r\tmessage: Could not retrieve errno message using strerror_r.\n\r");
+                fprintf(
+					stderr,
+                    "logger.c#printError\n\r\tmessage: Could not retrieve errno message using strerror_r.\n\r"
+				);
             } else {
-                fprintf(stderr,
-                        "logger.c#printError\n\r\terrno message: %s\n\r",
-                        errnoMessage);
+                fprintf(
+					stderr,
+                    "logger.c#printError\n\r\terrno message: %s\n\r",
+                    errnoMessage
+				);
             }
 
             return;
         }
 
-        fprintf(stderr,
-                "%s#%s:\n\r\terrno message: %s\n\r\tmessage: %s\n\r",
-                fileName,
-                functionName,
-                errnoMessage,
-                message);
+        fprintf(
+			stderr,
+            "%s#%s:\n\r\terrno message: %s\n\r\tmessage: %s\n\r",
+            fileName,
+            functionName,
+            errnoMessage,
+            message
+		);
     } else {
-        fprintf(stderr,
-                "%s#%s:\n\r\tmessage: %s\n\r\r",
-                fileName,
-                functionName,
-                message);
+        fprintf(
+			stderr,
+            "%s#%s:\n\r\tmessage: %s\n\r\r",
+            fileName,
+            functionName,
+            message
+		);
     }
 }
